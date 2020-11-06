@@ -1,37 +1,49 @@
 
-def main(string,sub_string):
-    delete_space(string)
-    search_sub_string(string,sub_string)
-
-def delete_space (string):
-    str = ""
-    n = 0
-    m = 0
-    for j in range(len(string)-1,0,-1):
-        if string[j] != " ":
-            n = j
-            break
-    for j in range(len(string)):
-        if string[j] != " ":
-            m = j
-            break
-    for i in range(m,n+1):
-        str = str + string[i]
+def main(string,sub_string,str_new):
+    str = trim(string)
     print(str)
+    start = find(string,sub_string)
+    print(start)
+    str_edit = replace(string,start,str_new)
 
-def search_sub_string (string,sub_string):
+def trim (string):
+    str = ""
+    for i in range(0,len(string)):
+        if string[i] == " " and string[i+1] == " ":
+            continue
+        else:
+            str = str + string[i]
+    return str
+
+def find (string,sub_string):
+    start = []
     j = 0
     k = 0
     for i in range(len(string)):
         if string[i] == sub_string[j]:
-                j += 1
-                k = i
-                if j == len(sub_string):
-                    print("конечный индекс подстроки",k,"начальный индекс подстроки",k-(len(sub_string)-1))
-                    j = 0
+            j += 1
+            k = i
+            if j == len(sub_string):
+                start.append(k-(len(sub_string)-1))
+                start.append(k)
+                j = 0
         else:
             j = 0
+    return start
 
-string = "мама мыла    раму    "
-sub_string = "мыла "
-main(string,sub_string)
+def replace (string,start,str_new):
+    str_edit = ""
+    if len(start) != 0:
+        for i in range(len(start)):
+            if i == 0:
+                str_edit = str_edit + string[i:start[i]] + str_new
+            if i % 2 == 0 and i != 0:
+                str_edit = str_edit + string[start[i-1]+1:start[i]] + str_new
+            if i == len(start)-1:
+                str_edit = str_edit + string[start[i]+1:len(string)]
+    print(str_edit)
+
+string = " sjygf мыла  rjgh  мыла раму"
+sub_string = "мыла"
+str_new = "лилa"
+main(string,sub_string,str_new)
