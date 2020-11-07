@@ -2,48 +2,52 @@
 def main(string,sub_string,str_new):
     str = trim(string)
     print(str)
-    start = find(string,sub_string)
-    print(start)
-    str_edit = replace(string,start,str_new)
+    indexes = find(string,sub_string)
+    print(indexes)
+    str_edit = replace(string,sub_string,str_new)
+    print(str_edit)
 
-def trim (string):
+def trim(string):
     str = ""
-    for i in range(0,len(string)):
+    for i in range(len(string)-1):
         if string[i] == " " and string[i+1] == " ":
             continue
         else:
             str = str + string[i]
+    if string[len(string)-1] != " ":
+        str = str + string[len(string)-1]
+    if str[0] == " ":
+        str = str[1:len(str)]
+    if str[len(str)-1] == " ":
+        str = str[0:len(str)-1]
     return str
 
-def find (string,sub_string):
-    start = []
+def find(string,sub_string):
+    indexes = []
     j = 0
-    k = 0
     for i in range(len(string)):
         if string[i] == sub_string[j]:
             j += 1
-            k = i
             if j == len(sub_string):
-                start.append(k-(len(sub_string)-1))
-                start.append(k)
+                indexes.append(i-len(sub_string)+1)
                 j = 0
         else:
             j = 0
-    return start
+    return indexes
 
-def replace (string,start,str_new):
+def replace(string, sub_string, str_new):
     str_edit = ""
-    if len(start) != 0:
-        for i in range(len(start)):
+    indexes = find(string, sub_string)
+    if len(indexes) != 0:
+        for i in range(len(indexes)):
             if i == 0:
-                str_edit = str_edit + string[i:start[i]] + str_new
-            if i % 2 == 0 and i != 0:
-                str_edit = str_edit + string[start[i-1]+1:start[i]] + str_new
-            if i == len(start)-1:
-                str_edit = str_edit + string[start[i]+1:len(string)]
-    print(str_edit)
+                str_edit = str_edit + string[i:indexes[i]] + str_new
+            else:
+                str_edit = str_edit + string[indexes[i - 1] + len(sub_string):indexes[i]] + str_new
+        str_edit = str_edit + string[indexes[len(indexes) - 1] + len(sub_string):len(string)]
+    return str_edit
 
-string = " sjygf мыла  rjgh  мыла раму"
+string = "            dhd sdjlsnd мыла skdnskdb v мыла                              "
 sub_string = "мыла"
 str_new = "лилa"
 main(string,sub_string,str_new)
