@@ -12,10 +12,9 @@ def matrixReshape(self, nums: List[List[int]], r: int, c: int) -> List[List[int]
     temp = []
     if len(nums[0]) * len(nums) != r * c:
         return nums
-    else:
-        for i in range(len(nums)):
-            for j in range(len(nums[0])):
-                temp.append(nums[i][j])
+    for i in range(len(nums)):
+        for j in range(len(nums[0])):
+            temp.append(nums[i][j])
     new_matrix = []
     for k in range(r):
         new_matrix.append([0] * c)
