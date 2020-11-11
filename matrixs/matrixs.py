@@ -9,10 +9,10 @@ def transpose(self, A: List[List[int]]) -> List[List[int]]:
 
 
 def matrixReshape(self, nums: List[List[int]], r: int, c: int) -> List[List[int]]:
+    temp = []
     if len(nums[0]) * len(nums) != r * c:
         return nums
     else:
-        temp = []
         for i in range(len(nums)):
             for j in range(len(nums[0])):
                 temp.append(nums[i][j])
@@ -24,3 +24,13 @@ def matrixReshape(self, nums: List[List[int]], r: int, c: int) -> List[List[int]
             new_matrix[b][d] = temp.pop(0)
     return new_matrix
 
+def allCellsDistOrder(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
+    temp = []
+    result = []
+    for i in range(R):
+        for j in range(C):
+            temp.append([i,j,abs(i-r0) + abs(j-c0)])
+    distance = sorted(temp,key = lambda x : (x[2]))
+    for a in distance:
+        result.append([a[0], a[1]])
+    return result
