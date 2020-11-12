@@ -23,12 +23,10 @@ def matrixReshape(self, nums: List[List[int]], r: int, c: int) -> List[List[int]
             new_matrix[b][d] = temp.pop(0)
     return new_matrix
 
-
 def allCellsDistOrder(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
-    temp = []
     result = []
     for i in range(R):
         for j in range(C):
-            temp.append([i, j, abs(i - r0) + abs(j - c0)])
-    for a in sorted(temp, key=lambda x: (x[2])): result.append([a[0], a[1]])
-    return result
+            result.append([i,j])
+    return sorted(result, key = lambda i: abs(i[0]-r0) + abs(i[1]-c0))
+
