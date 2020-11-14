@@ -5,11 +5,11 @@ from time import sleep
 from random import randint
 
 # creation initial matrix
-def original_matrix(w,h,dot):
+def original_matrix(w, h, dot):
     x = 0
     matrix1 = [[0] * h for i in range(w)]
     while x < dot:
-        i,j = randint(0,w-1),randint(0,h-1)
+        i, j = randint(0, w-1), randint(0, h-1)
         if matrix1[i][j] == 0:
             matrix1[i][j] = 1
             x += 1
@@ -39,22 +39,24 @@ def result_matrix(matrix):
                 else:
                     new_matrix[i][j] = 1
     result = [[0] * (len(new_matrix[0]) - 2) for k in range(len(new_matrix) - 2)]
-    for k in range(1,len(new_matrix)-1):
-        for q in range(1,len(new_matrix[0])-1):
+    for k in range(1, len(new_matrix)-1):
+        for q in range(1, len(new_matrix[0])-1):
             result[k-1][q-1] = new_matrix[k][q]
     return result
 
 # initial data
-r = int(input("Rows of the matrix"))
-c = int(input("Columns of the matrix"))
-alive_dot = int(input("Alive dot"))
+rows = int(input("Rows of the matrix  "))
+columns = int(input("Columns of the matrix  "))
+alive_dots = int(input("Alive dots  "))
 # initial array
-m1 = original_matrix(r,c,alive_dot)
-print(m1)
+Rows_of_the_matrix = original_matrix(rows, columns, alive_dots)
 # outputting arrays
 while True:
     sleep(2)
     os.system("cls")
-    m1 = result_matrix(m1)
-    print(m1)
+    Rows_of_the_matrix = result_matrix(Rows_of_the_matrix)
+    for i in range(len(Rows_of_the_matrix)):
+        print(Rows_of_the_matrix[i])
+        if i == len(Rows_of_the_matrix)-1:
+            print("\n")
 
