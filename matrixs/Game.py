@@ -49,14 +49,14 @@ rows = int(input("Rows of the matrix  "))
 columns = int(input("Columns of the matrix  "))
 alive_dots = int(input("Alive dots  "))
 # initial array
-Rows_of_the_matrix = original_matrix(rows, columns, alive_dots)
+matrix = original_matrix(rows, columns, alive_dots)
 # outputting arrays
 while True:
     sleep(2)
     os.system("cls")
-    Rows_of_the_matrix = result_matrix(Rows_of_the_matrix)
-    for i in range(len(Rows_of_the_matrix)):
-        print(Rows_of_the_matrix[i])
-        if i == len(Rows_of_the_matrix)-1:
+    matrix = result_matrix(matrix)
+    for i in range(len(matrix)):
+        print(matrix[i])
+        if i == len(matrix)-1:
             print("\n")
 
